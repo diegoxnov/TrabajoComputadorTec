@@ -1,0 +1,18 @@
+## .NET
+bin/
+obj/
+*.user
+.vs/
+
+## Secrets
+**/appsettings.Development.json
+**/appsettings.Production.json
+
+## Angular / Node
+inventario-pc-frontend/node_modules/
+inventario-pc-frontend/dist/
+inventario-pc-frontend/.angular/
+
+## OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="InventarioPC.Domain/InventarioPC.Domain.csproj" />
+  <Project Path="InventarioPC.DataAccess/InventarioPC.DataAccess.csproj" />
+  <Project Path="InventarioPC.Business/InventarioPC.Business.csproj" />
+  <Project Path="InventarioPC.Api/InventarioPC.Api.csproj" />
+</Solution>

@@ -1,0 +1,15 @@
+<h2>Historial de armados</h2>
+
+@for (armado of armados(); track armado.id) {
+  <div class="armado-card">
+    <h3>{{ armado.nombre }} — {{ armado.precioTotal | number: '1.2-2' }}</h3>
+    <p>{{ armado.fechaCreacion | date: 'short' }}</p>
+    <ul>
+      @for (detalle of armado.detalles; track detalle.productoId) {
+        <li>{{ detalle.productoNombre }} — {{ detalle.precio | number: '1.2-2' }}</li>
+      }
+    </ul>
+  </div>
+} @empty {
+  <p>Aún no hay armados registrados.</p>
+}

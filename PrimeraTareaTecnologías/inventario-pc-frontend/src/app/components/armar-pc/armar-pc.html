@@ -1,0 +1,33 @@
+<h2>Armar PC</h2>
+
+<label>
+  Nombre del armado
+  <input type="text" [(ngModel)]="nombreArmado" name="nombreArmado" />
+</label>
+
+@for (categoria of categorias(); track categoria; let i = $index) {
+  <div>
+    <label>
+      {{ categoria }}
+      <select [(ngModel)]="seleccion[i]" [name]="'categoria-' + i">
+        <option [ngValue]="null">-- Ninguno --</option>
+        @for (producto of productosPorCategoria(i); track producto.id) {
+          <option [ngValue]="producto.id">
+            {{ producto.nombre }} ({{ producto.marca }}) - {{ producto.precio | number: '1.2-2' }} - stock: {{ producto.stock }}
+          </option>
+        }
+      </select>
+    </label>
+  </div>
+}
+
+<h3>Precio total: {{ precioTotal() | number: '1.2-2' }}</h3>
+
+@if (mensajeError()) {
+  <p class="error">{{ mensajeError() }}</p>
+}
+@if (mensajeExito()) {
+  <p class="exito">{{ mensajeExito() }}</p>
+}
+
+<button (click)="armar()">Armar</button>

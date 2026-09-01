@@ -1,0 +1,35 @@
+<h2>Productos</h2>
+
+<a routerLink="/productos/nuevo">+ Nuevo producto</a>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Categoría</th>
+      <th>Marca</th>
+      <th>Precio</th>
+      <th>Stock</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (producto of productos(); track producto.id) {
+      <tr>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ nombreCategoria(producto.categoria) }}</td>
+        <td>{{ producto.marca }}</td>
+        <td>{{ producto.precio | number: '1.2-2' }}</td>
+        <td>{{ producto.stock }}</td>
+        <td>
+          <a [routerLink]="['/productos', producto.id, 'editar']">Editar</a>
+          <button (click)="eliminar(producto.id)">Eliminar</button>
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="6">No hay productos registrados.</td>
+      </tr>
+    }
+  </tbody>
+</table>

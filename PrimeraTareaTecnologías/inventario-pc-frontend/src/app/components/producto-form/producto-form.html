@@ -1,0 +1,34 @@
+<h2>{{ productoId ? 'Editar producto' : 'Nuevo producto' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <label>
+    Nombre
+    <input type="text" formControlName="nombre" />
+  </label>
+
+  <label>
+    Categoría
+    <select formControlName="categoria">
+      @for (categoria of categorias(); track categoria; let i = $index) {
+        <option [value]="i">{{ categoria }}</option>
+      }
+    </select>
+  </label>
+
+  <label>
+    Marca
+    <input type="text" formControlName="marca" />
+  </label>
+
+  <label>
+    Precio
+    <input type="number" step="0.01" formControlName="precio" />
+  </label>
+
+  <label>
+    Stock
+    <input type="number" formControlName="stock" />
+  </label>
+
+  <button type="submit" [disabled]="form.invalid">Guardar</button>
+</form>
