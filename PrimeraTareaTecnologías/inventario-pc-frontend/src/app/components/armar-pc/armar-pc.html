@@ -1,33 +1,38 @@
-<h2>Armar PC</h2>
+<h2 class="mb-4">Armar PC</h2>
 
-<label>
-  Nombre del armado
-  <input type="text" [(ngModel)]="nombreArmado" name="nombreArmado" />
-</label>
+<div class="mb-3 col-12 col-md-8 col-lg-6">
+  <label class="form-label">Nombre del armado</label>
+  <input type="text" class="form-control" [(ngModel)]="nombreArmado" name="nombreArmado" />
+</div>
 
-@for (categoria of categorias(); track categoria; let i = $index) {
-  <div>
-    <label>
-      {{ categoria }}
-      <select [(ngModel)]="seleccion[i]" [name]="'categoria-' + i">
-        <option [ngValue]="null">-- Ninguno --</option>
-        @for (producto of productosPorCategoria(i); track producto.id) {
-          <option [ngValue]="producto.id">
-            {{ producto.nombre }} ({{ producto.marca }}) - {{ producto.precio | number: '1.2-2' }} - stock: {{ producto.stock }}
-          </option>
-        }
-      </select>
-    </label>
-  </div>
-}
+<div class="row row-cols-1 row-cols-md-2 g-3 mb-3">
+  @for (categoria of categorias(); track categoria; let i = $index) {
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <label class="form-label fw-semibold">{{ categoria }}</label>
+          <select class="form-select" [(ngModel)]="seleccion[i]" [name]="'categoria-' + i">
+            <option [ngValue]="null">-- Ninguno --</option>
+            @for (producto of productosPorCategoria(i); track producto.id) {
+              <option [ngValue]="producto.id">
+                {{ producto.nombre }} ({{ producto.marca }}) - {{ producto.precio | number: '1.2-2' }} - stock: {{ producto.stock }}
+              </option>
+            }
+          </select>
+        </div>
+      </div>
+    </div>
+  }
+</div>
 
-<h3>Precio total: {{ precioTotal() | number: '1.2-2' }}</h3>
+<h3 class="mb-3">Precio total: {{ precioTotal() | number: '1.2-2' }}</h3>
 
 @if (mensajeError()) {
-  <p class="error">{{ mensajeError() }}</p>
+  <div class="alert alert-danger">{{ mensajeError() }}</div>
 }
 @if (mensajeExito()) {
-  <p class="exito">{{ mensajeExito() }}</p>
+  <div class="alert alert-success">{{ mensajeExito() }}</div>
 }
 
-<button (click)="armar()">Armar</button>
+<button (click)="armar()" class="btn btn-primary me-2">Armar</button>
+<button (click)="limpiarSeleccion()" class="btn btn-outline-secondary">Limpiar</button>

@@ -1,9 +1,33 @@
-<nav>
-  <a routerLink="/productos">Productos</a>
-  <a routerLink="/armar">Armar PC</a>
-  <a routerLink="/armados">Historial de armados</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/productos">Inventario PC</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/productos" routerLinkActive="active">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/armar" routerLinkActive="active">Armar PC</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/armados" routerLinkActive="active">Historial de armados</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
 
-<main>
+<main class="container pb-5">
   <router-outlet />
 </main>

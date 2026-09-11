@@ -4,6 +4,7 @@ import { DecimalPipe } from '@angular/common';
 import { Producto as ProductoService } from '../../services/producto';
 import { Armado as ArmadoService } from '../../services/armado';
 import { ProductoDto } from '../../models/producto.model';
+import { calcularPrecioTotalSeleccion } from '../../utils/inventario.utils';
 
 @Component({
   selector: 'app-armar-pc',
@@ -20,12 +21,7 @@ export class ArmarPc implements OnInit {
   mensajeExito = signal<string | null>(null);
 
   precioTotal(): number {
-    return Object.values(this.seleccion)
-      .filter((id): id is number => id != null)
-      .reduce((total, id) => {
-        const producto = this.productos().find((p) => p.id === id);
-        return total + (producto?.precio ?? 0);
-      }, 0);
+    return calcularPrecioTotalSeleccion(this.productos(), Object.values(this.seleccion));
   }
 
   constructor(
@@ -68,5 +64,16 @@ export class ArmarPc implements OnInit {
         this.mensajeError.set(err.error ?? 'Ocurrió un error al armar la PC.');
       },
     });
+  }
+
+  /**
+   * Función STATEFUL: resetea el estado del componente (nombre, selección y mensajes).
+   */
+  limpiarSeleccion(): void {
+    this.nombreArmado = '';
+    this.seleccion = {};
+    this.categorias().forEach((_, i) => (this.seleccion[i] = null));
+    this.mensajeError.set(null);
+    this.mensajeExito.set(null);
   }
 }

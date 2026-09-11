@@ -1,15 +1,27 @@
-<h2>Historial de armados</h2>
+<h2 class="mb-4">Historial de armados</h2>
 
-@for (armado of armados(); track armado.id) {
-  <div class="armado-card">
-    <h3>{{ armado.nombre }} — {{ armado.precioTotal | number: '1.2-2' }}</h3>
-    <p>{{ armado.fechaCreacion | date: 'short' }}</p>
-    <ul>
-      @for (detalle of armado.detalles; track detalle.productoId) {
-        <li>{{ detalle.productoNombre }} — {{ detalle.precio | number: '1.2-2' }}</li>
-      }
-    </ul>
-  </div>
-} @empty {
-  <p>Aún no hay armados registrados.</p>
-}
+<div class="row row-cols-1 row-cols-md-2 g-3">
+  @for (armado of armados(); track armado.id) {
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start">
+            <h5 class="card-title">{{ armado.nombre }}</h5>
+            <span class="badge text-bg-primary">{{ armado.precioTotal | number: '1.2-2' }}</span>
+          </div>
+          <h6 class="card-subtitle mb-2 text-muted">{{ armado.fechaCreacion | date: 'short' }}</h6>
+          <ul class="list-group list-group-flush">
+            @for (detalle of armado.detalles; track detalle.productoId) {
+              <li class="list-group-item d-flex justify-content-between">
+                <span>{{ detalle.productoNombre }}</span>
+                <span>{{ detalle.precio | number: '1.2-2' }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  } @empty {
+    <p class="text-muted">Aún no hay armados registrados.</p>
+  }
+</div>
